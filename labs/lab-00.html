@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 01 · Marissa Gani</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Marissa Gani</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Labs</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Lab 01 · September 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Entry 1: NYU Shanghai</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      Where is the NYU Shanghai campus?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      Data from Google Earth Engine is credited to Airbus, and dated at 04/01/2025 and earlier. 
+         The map is missing people, street/building names, and front-side views.
+    </p>
+
+    <h2>The method</h2>
+    <p>
+      Satellite map is a screenshot from Google Earth Engine webpage, taken on September 5, 2026. Labels were set to "Exploration" mode,
+         and camera was zoomed in to around 755m.
+    </p>
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    <figure>
+     <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 1 - China in Layers - Marissa Gani" src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=930f9430d5f347ae91ea441f81d11898&theme=light&bookmarks=true&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=99.71830682800079,38.56063360701479&scale=36978595.474472" ></iframe>
+      <figcaption>
+        The main focus structure is the tall, trapezoidal building towards center of the image, indicating the NYU Shanghai campus.
+      </figcaption>
+    </figure>
+
+    <h2>What I found</h2>
+    <p>
+      The trapezoidal campus is shaped as a border of buildings around a school lawn. Looking closer at the roads,
+         three purple NYU shuttle buses are stopping near the entry gate, supporting the idea that this building hosts 
+         NYU Shanghai's campus.
+    </p>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        A limitation on this satellite view is that there are few labels around the campus. We cannot define the actual address of the campus, 
+           and we must make assumptions of students, which are not visible in the image. Through this map, we can only get a sense of what the campus 
+           looks like from an aerial view, and the general infrastructure that surrounds it. We only see the physical materials of the building, and 
+           not the community that it holds.
+      </p>
+      <p>
+        <strong>AI use:</strong> No AI tools were used
+        for this entry.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Marissa Gani · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
