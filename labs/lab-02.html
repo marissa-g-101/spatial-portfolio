@@ -46,40 +46,43 @@
 
     <h2>The data</h2>
     <p>
-     Layer: elections_2016 Polygon Layer
-Link: https://services2.arcgis.com/j80Jz20at6Bi0thr/arcgis/rest/services/election_2016_v2/FeatureServer 
-Last Updated: May 20, 2019 at 6:38pm
-Author: Teach_with_GIS
-Limitations Found: Column titled DEM_votes is empty and serves as a decoy, whereas the similarly named field votes_DEM contains the necessary information. Percentage unit is misleading, and should be labeled as DEM_per because these data values represent proportions not percentages. DEM and GOP votes do not sum to 1, as votes for third parties were not included and not counted towards the total. Data rows for Alaska have identical numbers, duplicately counted 28 times, which inflates measurement values. Summing the layers produces a total of much less than the certified 2016 voting results, meaning there is a reconciliation gap and some states are undercounted.
+      Layer: elections_2016 Polygon Layer <br>
+Link: https://services2.arcgis.com/j80Jz20at6Bi0thr/arcgis/rest/services/election_2016_v2/FeatureServer <br>
+ Last Updated: May 20, 2019 at 6:38pm <br>
+ Author: Teach_with_GIS <br>
+ Limitations Found: Column titled DEM_votes is empty and serves as a decoy, whereas the similarly named field votes_DEM contains the necessary information. Percentage unit is misleading, and should be labeled as DEM_per because these data values represent proportions not percentages. DEM and GOP votes do not sum to 1, as votes for third parties were not included and not counted towards the total. Data rows for Alaska have identical numbers, duplicately counted 28 times, which inflates measurement values. Summing the layers produces a total of much less than the certified 2016 voting results, meaning there is a reconciliation gap and some states are undercounted. <br>
  
 
     </p>
 
     <h2>The method</h2>
     <p>
-      Map 1a Hue: GOP was set to red, while DEM was set to blue to mirror party colors for easy identification.
-Map 1b Hue: DEM_per identified as a rate of DEM votes over the Total votes in a given county. Class count is 5, and the classification scheme is Equal Interval. Breaks are at 0.211, 0.39, 0.57, 0.749, and are ruled by the algorithm below:
-equal_interval:
-    step = (max(v) - min(v)) / k
-    cuts = [ min(v) + i*step   for i = 1 .. k-1 ]
-    # every class spans the same RANGE of values.
-    # how many counties land in each is not considered,
-    # so one outlier stretches every cut.
-
-Map 2 Size: Dots represent Total Votes rather than a proportion and party, and sizes are set to 3px-36px.
-Map 3 Value: Z-scores show how far each county deviates from the national county average (which is around 32% Democratic). Values are based on the national population, even when filtered by state. DEM-per display revolves around the given Arcade expression: 
-// Lab 2 - standardised score for % DEM, 2016
-//
-//   z = (value - mean) / standard deviation
-//
-// The two constants come from the Statistics panel
-// for DEM_per, with no filter applied.
-var mean = 0.3174;
-var sd   = 0.1527;
-return ($feature.DEM_per - mean) / sd;
-         
-Map 4 Area: Data was taken from LAB02_state-votes-2016.csv
-and imported to go-cart.io software. Votes for DEM, GOP, and Total were kept the same, while Alaska’s 28 duplicate layers were rectified to just one figure. Cartogram was set to DEM_per using color and area.
+       Map 1a Hue: GOP was set to red, while DEM was set to blue to mirror party colors for easy identification.  </p>
+ <p>Map 1b Hue: DEM_per identified as a rate of DEM votes over the Total votes in a given county. Class count is 5, and the classification scheme is Equal Interval. Breaks are at 0.211, 0.39, 0.57, 0.749, and are ruled by the algorithm below:  </p>
+ <p>
+       equal_interval: <br>
+    step = (max(v) - min(v)) / k <br>
+    cuts = [ min(v) + i*step   for i = 1 .. k-1 ] <br>
+   # every class spans the same RANGE of values. <br>
+# how many counties land in each is not considered, <br>
+    # so one outlier stretches every cut. <br>
+ </p>
+<p>Map 2 Size: Dots represent Total Votes rather than a proportion and party, and sizes are set to 3px-36px. </p>
+<p>Map 3 Value: Z-scores show how far each county deviates from the national county average (which is around 32% Democratic). Values are based on the national population, even when filtered by state. DEM-per display revolves around the given Arcade expression:  </p>
+<p>
+     // Lab 2 - standardised score for % DEM, 2016 <br>
+// <br>
+//   z = (value - mean) / standard deviation <br>
+// <br>
+// The two constants come from the Statistics panel <br>
+// for DEM_per, with no filter applied. <br>
+var mean = 0.3174; <br>
+var sd   = 0.1527; <br>
+return ($feature.DEM_per - mean) / sd; <br>
+ </p>
+       
+<p>Map 4 Area: Data was taken from LAB02_state-votes-2016.csv
+and imported to go-cart.io software. Votes for DEM, GOP, and Total were kept the same, while Alaska’s 28 duplicate layers were rectified to just one figure. Cartogram was set to DEM_per using color and area. </p>
 
 
     </p>
