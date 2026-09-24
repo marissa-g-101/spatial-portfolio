@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 01 · Marissa Gani</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Marissa Gani</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Labs</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Lab 01 · September 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Entry 1: Chongqing</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      How many people live in Chongqing?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      Data from ArcGIS by Esri (June 2025) is credited to OpenStreetMap contributors (TomTom, Garmin, USGS, FAO,NOAA); Garmin International, Inc.; U.S. Central Intelligence Agency (The World Factbook); National Geographic Society; Bartholemew and Times Books; U.S. Central Intelligence Agency (The World Factbook); International Organization for Standardization (ISO); U.S. Department of State, Bureau of Intelligence and Research; GeoNames; Executive Secretary for Foreign Names - U.S. Board on Geographic Names; U.S. National Geospatial-Intelligence Agency (NGA); BBC News; Global Mapping International; United Nations Statistics Division; United Nations Human Settlements Programme (UN-Habitat); U.S. Census Bureau. Population data is taken from 2020 UN-Habitat, and may not accurately reflect real population of Chongqing, due to variations in border measurements. 
+
+    </p>
+
+    <h2>The method</h2>
+    <p>
+      World map was filtered to only outline China, along with rivers and roads. The Chongqing municipality was highlighted, and other cities were sized according to population size. “Area Measurement” tool was used to roughly trace an outline of Chongqing, to determine population density. Basemap follows “Topographic” features to allow the visualization of labelled landmarks, building outlines, roads, and finally elevation levels, which is important when pinpointing the famous Great Wall of China.
+    </p>
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    <figure>
+     <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 1 - China in Layers - Marissa Gani" src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=930f9430d5f347ae91ea441f81d11898&theme=light&bookmarks=true&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=99.71830682800079,38.56063360701479&scale=36978595.474472" ></iframe>
+      <figcaption>
+        Map shows a topographic-style outline of China, including the unit of interest: Chongqing, which has a population of roughly 32million people. Other rivers and roads are displayed, along with pinpoints of important areas (Beijing, Shanghai, and the Great Wall of China).
+      </figcaption>
+    </figure>
+
+    <h2>What I found</h2>
+    <p>
+      Chongqing’s population is given at around 32million people, which is different compared to what is shown in the ArcGIS base map data. Based on the attributes table, the population (POP) source is taken from a 2020 UN Habitat, which bases measurements on simply-shaped units of boundaries. This number is more reflective of just the Chongqing city center, where most people reside, as compared to the actual 32million in the Chinese-defined municipality.
+
+    </p>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        Limits of this kind of mapping involve different sources, and different ways to measure boundaries. As seen above, ArcGIS only has a population at ~12million people, while China defines Chongqing as an entire population of 32million. The discrepancy here represents the Modifialable Area Unit Problem (MAUP), which shows that how boundaries are defined can directly influence results and conclusions. This information is limited and not something that can be inherently deduced from the display, so more analysis is needed to be able to get a clear picture.
+
+      </p>
+      <p>
+        <strong>AI use:</strong> No AI tools were used
+        for this entry.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Marissa Gani · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
