@@ -27,11 +27,11 @@
 <article class="entry">
   <div class="wrap wrap-narrow">
 
-    <p class="kicker">Lab 01 · September 2026</p>
+    <p class="kicker">Lab 02 · September 2026</p>
 
     <!-- EDIT THIS: a title that says what you found, not what you did.
          "Where the metro does not go" beats "Lab 1 report". -->
-    <h1>Entry 1: Chongqing</h1>
+    <h1>Entry 2: 2016 USA Election</h1>
 
     <!-- ============================================================
          The six parts. Every entry in this course has all six.
@@ -41,18 +41,47 @@
 
     <h2>The question</h2>
     <p>
-      How many people live in Chongqing?
+      Where were the majority of voters in the 2016 USA Presidential Election?
     </p>
 
     <h2>The data</h2>
     <p>
-      Data from ArcGIS by Esri (June 2025) is credited to OpenStreetMap contributors (TomTom, Garmin, USGS, FAO,NOAA); Garmin International, Inc.; U.S. Central Intelligence Agency (The World Factbook); National Geographic Society; Bartholemew and Times Books; U.S. Central Intelligence Agency (The World Factbook); International Organization for Standardization (ISO); U.S. Department of State, Bureau of Intelligence and Research; GeoNames; Executive Secretary for Foreign Names - U.S. Board on Geographic Names; U.S. National Geospatial-Intelligence Agency (NGA); BBC News; Global Mapping International; United Nations Statistics Division; United Nations Human Settlements Programme (UN-Habitat); U.S. Census Bureau. Population data is taken from 2020 UN-Habitat, and may not accurately reflect real population of Chongqing, due to variations in border measurements. 
+     Layer: elections_2016 Polygon Layer
+Link: https://services2.arcgis.com/j80Jz20at6Bi0thr/arcgis/rest/services/election_2016_v2/FeatureServer 
+Last Updated: May 20, 2019 at 6:38pm
+Author: Teach_with_GIS
+Limitations Found: Column titled DEM_votes is empty and serves as a decoy, whereas the similarly named field votes_DEM contains the necessary information. Percentage unit is misleading, and should be labeled as DEM_per because these data values represent proportions not percentages. DEM and GOP votes do not sum to 1, as votes for third parties were not included and not counted towards the total. Data rows for Alaska have identical numbers, duplicately counted 28 times, which inflates measurement values. Summing the layers produces a total of much less than the certified 2016 voting results, meaning there is a reconciliation gap and some states are undercounted.
+ 
 
     </p>
 
     <h2>The method</h2>
     <p>
-      World map was filtered to only outline China, along with rivers and roads. The Chongqing municipality was highlighted, and other cities were sized according to population size. “Area Measurement” tool was used to roughly trace an outline of Chongqing, to determine population density. Basemap follows “Topographic” features to allow the visualization of labelled landmarks, building outlines, roads, and finally elevation levels, which is important when pinpointing the famous Great Wall of China.
+      Map 1a Hue: GOP was set to red, while DEM was set to blue to mirror party colors for easy identification.
+Map 1b Hue: DEM_per identified as a rate of DEM votes over the Total votes in a given county. Class count is 5, and the classification scheme is Equal Interval. Breaks are at 0.211, 0.39, 0.57, 0.749, and are ruled by the algorithm below:
+equal_interval:
+    step = (max(v) - min(v)) / k
+    cuts = [ min(v) + i*step   for i = 1 .. k-1 ]
+    # every class spans the same RANGE of values.
+    # how many counties land in each is not considered,
+    # so one outlier stretches every cut.
+
+Map 2 Size: Dots represent Total Votes rather than a proportion and party, and sizes are set to 3px-36px.
+Map 3 Value: Z-scores show how far each county deviates from the national county average (which is around 32% Democratic). Values are based on the national population, even when filtered by state. DEM-per display revolves around the given Arcade expression: 
+// Lab 2 - standardised score for % DEM, 2016
+//
+//   z = (value - mean) / standard deviation
+//
+// The two constants come from the Statistics panel
+// for DEM_per, with no filter applied.
+var mean = 0.3174;
+var sd   = 0.1527;
+return ($feature.DEM_per - mean) / sd;
+         
+Map 4 Area: Data was taken from LAB02_state-votes-2016.csv
+and imported to go-cart.io software. Votes for DEM, GOP, and Total were kept the same, while Alaska’s 28 duplicate layers were rectified to just one figure. Cartogram was set to DEM_per using color and area.
+
+
     </p>
 
     <!-- ============================================================
@@ -68,23 +97,47 @@
 
          Delete whichever one you are not using.
          ============================================================ -->
-    <figure>
-     <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 1 - China in Layers - Marissa Gani" src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=930f9430d5f347ae91ea441f81d11898&theme=light&bookmarks=true&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=99.71830682800079,38.56063360701479&scale=36978595.474472" ></iframe>
+    
+        <figure>
+    
       <figcaption>
-        Map shows a topographic-style outline of China, including the unit of interest: Chongqing, which has a population of roughly 32million people. Other rivers and roads are displayed, along with pinpoints of important areas (Beijing, Shanghai, and the Great Wall of China).
+        Map 1a Hue: USA map of 2016 election displaying predominant party in each county. Red color represents where the proportion of GOP party was larger, and blue color represents DEM party. Gradient scale indicates the distance between the predominant party and the losing party. Units are party votes over total votes in a county.
+
+            <figure>
+    
+      <figcaption>
+        Map 1b Hue: USA map of 2016 election displaying DEM party vote proportion in each county. Data is split into 5 Equal Intervals, where a darker blue color represents a higher proportion of votes for the DEM party. Units are DEM_per rates as DEM party votes over total votes in a county.
+
+           <figure>
+    
+      <figcaption>
+        Map 2 Size: USA map of 2016 election displaying total votes in each county. Larger dot sizes represent an increasingly larger vote population, and no political party is shown. Units are total votes counted in a county.
+
+       
+       <figure>
+    <iframe width="700" height="600" allow="local-network-access; geolocation" title="Lab 2 - Four Maps of 2016 - Marissa Gani" src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=b1b68513eaee4570aeccea44be9d29d0&theme=light&heading=true&legend=true&share=true&scroll=false&basemaps=true&center=-100.2566188772202,41.68621219072837&scale=36978595.474472" ></iframe>
+      <figcaption>
+        Map 3 Value: USA map of 2016 election displaying variance of party votes nationally. Zscores are calculated as standard deviations away from the national county average (which is around 32% Democrat). Any county more Democratic is indicated with a blue color and positive value, and any county more Republican is indicated with a red color and negative value. Units are z=standard deviations of the DEM vote.
+
+            <figure>
+    
+      <figcaption>
+        Map 4 Area: USA cartogram of 2016 election displaying DEM votes. Area of each state represents quantity of votes, while color represents proportion. Units are proportion of DEM votes per state, and area is measured with square kilometers..
+           
       </figcaption>
     </figure>
 
     <h2>What I found</h2>
     <p>
-      Chongqing’s population is given at around 32million people, which is different compared to what is shown in the ArcGIS base map data. Based on the attributes table, the population (POP) source is taken from a 2020 UN Habitat, which bases measurements on simply-shaped units of boundaries. This number is more reflective of just the Chongqing city center, where most people reside, as compared to the actual 32million in the Chinese-defined municipality.
+      There are subtle differences in viewer perception between various classification schemes. For example, manipulating breaks and intervals allows you to create biased divisions of data. In the comparison between “Equal Intervals” and “Quantile”, the colors and density became much darker, leading to very different conclusions about how widespread support was for the DEM party. “Natural Breaks” was an intermediate between these two, but the divisions are highly dependent on the data set. Each map has its own unique highlights and features, yet also hides and distorts other values. Using Hues allows easy display of data, but certain categories are removed (third-party voters), and the relation between votes and area can be misleading. Using Size, quantity is shown well, but there is a risk of overlap, and no conclusions can be made about party affiliation and who won. I have learned that there must be a tradeoff between keeping certain displays and sacrificing others, depending on the map’s fitness for use. The choropleth maps have shown me the biases inherent in each map– reiterating the idea that people vote, not geographical areas.
+
 
     </p>
 
     <h2>What this does not show</h2>
     <div class="limits">
       <p>
-        Limits of this kind of mapping involve different sources, and different ways to measure boundaries. As seen above, ArcGIS only has a population at ~12million people, while China defines Chongqing as an entire population of 32million. The discrepancy here represents the Modifialable Area Unit Problem (MAUP), which shows that how boundaries are defined can directly influence results and conclusions. This information is limited and not something that can be inherently deduced from the display, so more analysis is needed to be able to get a clear picture.
+        Limitations on this layer include the removal of third-party voters (not displayed in any dataset) and non-voters (the relevant populations of each county are based on votes counted). Duplicate rows and undercounted counties contribute to the population gap between this layer’s totals and the expected credited 2016 total. Alias labels also are not representative of calculations in some cases. No source data was found for this election_2016 layer, only the author and last update timestamp.
 
       </p>
       <p>
