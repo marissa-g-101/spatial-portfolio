@@ -133,7 +133,11 @@ return  'planar   ' + Round(planar, 3) + ' km2' <br>
 
     <h2>What I found</h2>
     <p>
-      The burned area given in the original layer was an outlier at over 800 square km, while other measurements and calculations reflected closer to around 500 square km. using different frames results in different calculated and measured values. For example, having the Web Mercator projection skews based on angles and latitude, by a factor of sec(phi) for perimeter and sec(phi) squared for areas. Changing pixel resolution on the Landsat Explorer app increases boundary undercertainties, which can have little effect on area measurements, yet greatly skew perimeter measurements. There is another discrepancy of estimating burned area due to the fact that the map and projections are 2D displays. The real world exists with 3D features, so by factoring in elevation heights and slopes on the Scene Viewer, we find that the burned area could also exist within a range of values. <br>
+      "Areas measured geodetically on the WGS 84 ellipsoid.
+Source geometry stored in EPSG:3857 (Web Mercator);
+planar areas in that frame are inflated by sec^2(phi)
+and are reported here only for comparison." <br>
+         The burned area given in the original layer was an outlier at over 800 square km, while other measurements and calculations reflected closer to around 500 square km. using different frames results in different calculated and measured values. For example, having the Web Mercator projection skews based on angles and latitude, by a factor of sec(phi) for perimeter and sec(phi) squared for areas. Changing pixel resolution on the Landsat Explorer app increases boundary undercertainties, which can have little effect on area measurements, yet greatly skew perimeter measurements. There is another discrepancy of estimating burned area due to the fact that the map and projections are 2D displays. The real world exists with 3D features, so by factoring in elevation heights and slopes on the Scene Viewer, we find that the burned area could also exist within a range of values. <br>
 When publishing, I would likely use the geodetic measurements, and be sure to note the pixel resolution given. Measuring using Web Mercator projection produces an outlier and heavily inflated value, whereas the rest of the incident historical figures are based on geodetic models. Changing the resolution to measure perimeter will also result in skewed measurements, due to uncertainties in how the boundaries are defined.
 
 
