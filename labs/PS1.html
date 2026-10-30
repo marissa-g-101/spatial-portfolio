@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Problem Set 1 · Marissa Gani</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Marissa Gani</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Problem Set</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Problem Set 1 · October 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Entry: Shanghai COVID-19 Support Scores</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      During the Shanghai COVID-19 lockdown, did the percentage of residents with access to a support system increase in the inner districts compared to the outer districts of the city?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      
+      Files: LAB04_shanghai-lockdown-survey.csv (田林, 康桥镇, 川沙新镇) and LAB04_shanghai-districts.geojson (from DataV.GeoAtlas) <br>
+Source: Text formats, Class Brightspace page files, Retrieved on 10/16/2026 <br>
+      Sampling Design: Purposive Sampling (quota ~200 for each of 16 districts, with 10% oversampling) <br>
+When the Survey file was set to UTF-8, characters became nonsense. The file needed to be set to an encoding of GB18030, which represents a Chinese national character standard on Windows. However, 533 of these rows read as 空, or Chinese for “empty”. There is no data with geometry attributed to it, so only 2795 out of 3348 respondents are accounted for. <br>
+The Boundaries file does not carry a license statement nor an accuracy figure and contact information. The original survey contained sensitive identifiable health information in the form of street addresses of most respondents, which was removed in this version of the file. 
+
+    </p>
+
+    <h2>The method</h2>
+    <p>
+   Define: Perceived support was measured on a scale of 0-12, with higher numbers corresponding to subjective higher support received by the respondent. A score of 8 or greater was used to denote respondents who were well-supported, and the midpoint of 6 was a marker for those who felt neither neglected nor well-supported.  <br>
+Maps and visualizations were created through ArcGIS Online, and calculations and charts for 3348 respondents were created through Microsoft Excel. <br>
+Observe Overall Survey Points: 1) Filter 2795 points with valid geocoded data to only respondents with support scores of 8 or greater. 2) Display as survey points into two maps of overall and filtered. 3) Display filtered points as heat map to determine any potential clustering. <br>
+Aggregate Points: 1) Run aggregate points to group all respondents into a district based on geocoded coordinates. 2) Calculate mean and standard deviation for each district. 3) Display as color coded choropleth for both mean and standard deviation.
+Reinput Missing Respondents: 1) Filter column by self-reported district. 2) Calculate mean and standard deviation per district. 3) Display as a chart, grouped into inner and outer districts by color, along with variation bars of STV/2.
+
+
+ </p>
+
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    
+                  
+      <figure>
+     <img src="comparison.png" alt="filtered points comparison">
+      <figcaption>
+        Figure 1: COVID-19 Survey Respondents in Shanghai Displayed on ArcGIS Online as Orange Dots. Filtered for support scores of 8 or greater. Total respondents includes 2795, excluding those without valid geocoded coordinates. From there, respondents with scores of 8 or greater were left with 1078.
+</figcaption>
+
+        <figure>
+     <img src="heatmap.png" alt="filtered points heatmap">
+      <figcaption>
+        Figure 2: COVID-19 Survey Respondents in Shanghai Displayed on ArcGIS Online as Heat Map filtered for support scores of 8 or greater. Total respondents includes 1078, excluding those without valid geocoded coordinates and those with support scores of lower than 8.
+</figcaption>
+
+          <figure>
+     <img src="meanstvmap.png" alt="choropleth mean and stv districts">
+      <figcaption>
+        Figure 3: Mean values and Standard Deviations for Support Scores per District, displayed on ArcGIS Online as Choropleth. Calculations were performed on the 2795 respondent sample size, excluding those without valid geocoded coordinates. 
+</figcaption>
+
+            <figure>
+     <img src="chart.png" alt="bar chart of mean values and variation per district">
+      <figcaption>
+        Figure 4: Mean values and Standard Deviations for Support Scores per District, displayed as Bar Chart on Microsoft Excel. Variation bars are set to plus/minus STV values divided by 2. Calculations were performed on the 3348 respondent sample size, using self-reported districts rather than geocoded coordinates. 
+</figcaption>
+
+              <figure>
+     <img src="table.png" alt="total table of values">
+      <figcaption>
+        Figure 5: Mean values and Standard Deviations for Support Scores per District, displayed on ArcGIS Online as Choropleth. Calculations were performed on the 3348 respondent sample size, using self-reported districts rather than geocoded coordinates.
+</figcaption>
+                 
+      
+    <h2>What I found</h2>
+    <p>
+     “Unweighted shares from the 2022 Shanghai Lockdown Survey, a
+purposive online sample: 2,795 of 3,348 respondents had a
+coordinate. Groups were defined by inner urban districts vs outer suburban/rural districts by Baidu Wiki.”
+ <br>
+        Inner districts were slightly more supported compared to outer districts, although the margin of difference was very little. Overall, all 16 districts had an average support score of around 6.5, meaning residents did not meet this report’s set standard of feeling well-supported. <br>
+Outliers include inner district Hongkou reporting lower support for residents, and outer district Chongming reporting higher support. An inner district having lower support could be explained due to older infrastructure in certain areas or neighborhoods with larger elderly populations, who may not be as well adjusted to new technology or the types of resources the city might be giving out. Chongming on the other hand, is separated by a water boundary and largely consists of rural agricultural areas. It could be likely that residents have already been self-sufficient and provide their own food supply, while also having closer communities, even before the lockdown. As a result, when COVID-19 hit, respondents in Chongming could have reported stronger support due to experiencing less drastic changes in their lifestyles.
+ 
+
+    </p>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        Limitations of the dataset include the purposive sampling factor, which means respondents per district must hit a quota and are not representative of random sampling. Also, Another limitation on ArcGIS Online was the hidden removal of 533 respondents without a valid geocoded coordinate. While analyses were being run, these responses were removed as they could be displayed on the ArcGIS map, leaving a total of only 2795 survey points. The sensitivity check was designed around this, calculating the mean and standard deviation on Microsoft Excel without a display. All 3348 respondents were included, and were grouped by their own self-reported district rather than a geocoded coordinate value. The results were similar to ArcGIS, where inner districts had a slightly higher average of support scores, yet overall for all 16 districts, most Shanghai residents neither felt neglected or well-supported and instead reported a score of around 6.5.
+
+      </p>
+      <p>
+        <strong>AI use:</strong> No AI tools were used
+        for this entry.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Marissa Gani · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
