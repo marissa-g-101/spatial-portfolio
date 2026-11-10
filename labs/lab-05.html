@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 05 · Marissa Gani</title>
+
+<!-- Note the ../ — this page is inside the labs folder, so it has to
+     look one level up to find the stylesheet. -->
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Marissa Gani</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html#labs">Labs</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="entry">
+  <div class="wrap wrap-narrow">
+
+    <p class="kicker">Lab 05 · November 2026</p>
+
+    <!-- EDIT THIS: a title that says what you found, not what you did.
+         "Where the metro does not go" beats "Lab 1 report". -->
+    <h1>Entry 5: Usable Soil on a Field</h1>
+
+    <!-- ============================================================
+         The six parts. Every entry in this course has all six.
+         Do not delete a heading — if a section is thin, that is
+         information too.
+         ============================================================ -->
+
+    <h2>The question</h2>
+    <p>
+      At an old farm, how much soil is usable for growing alfalfa and corn?
+    </p>
+
+    <h2>The data</h2>
+    <p>
+      Files: LAB05_simplified_farm.gpkg  LAB05_truth-p.tif <br>
+Source: Class Brightspace page files, Coordinate Reference System for both is  EPSG:32614, Retrieved on 11/09/2026 <br>
+The farm is synthetic, and the original attributes sampling table contained two different scales of P. This was fixed by inputting the expression: <br> “CASE WHEN "batch" = 'B' THEN "P" / 100 ELSE "P" END”.
+ 
+
+    </p>
+
+    <h2>The method</h2>
+    <p>
+   Sample points satisfying agricultural criteria to grow crops were filtered in yellow by the expression: <br> “"pH" >= 6 AND "pH" <= 7 AND "P_fix" >= 0.25 AND "P_fix" <= 0.80 AND "K" >= 1.8 AND "K" <= 2.9” <br>
+Map was created to fill in gaps using Inverse Distance Weighting (IDW). IDW Interpolation was run on Extent 435000,436800,4516000,4517800 [EPSG:32614], with 10m cell size, and distance coefficient p=1,2,4. <br>
+The true phosphorus values were overlaid on the map, and Error was shown on a map, calculated by expression: <br> “"idw_p2@1" - "LAB05_truth-p@1"”  
+
+
+ </p>
+
+
+    <!-- ============================================================
+         YOUR MAP
+         Two options:
+
+         1. An image. Export a PNG from ArcGIS or QGIS, put it in this
+            labs folder, and change the src below to your filename
+            (for example src="map-01.png").
+
+         2. A live web map. Publish it in ArcGIS Online, choose Share,
+            then Embed, and paste the src URL into the <iframe> line.
+
+         Delete whichever one you are not using.
+         ============================================================ -->
+    
+                  
+      <figure>
+     <img src="p.png" alt="Filtered sample points usable to grow corn highlighted in yellow.">
+      <figcaption>
+        Figure 1: Usable Field Points to Grow Crops (by pH, phosphorus levels, and potassium levels). Original dataset filtered at “"pH" >= 6 AND "pH" <= 7 AND "P" >= 0.25 AND "P" <= 0.80 AND "K" >= 1.8 AND "K" <= 2.9”. The yellow dots show the sample points that satisfy chemical limits to be able to grow corn. Only 31 are shown, in Fields 1-3, because the scale for Fields 4-5 had to be divided by an additional 100.
+</figcaption>
+
+           <figure>
+     <img src="idw_truth.png" alt="Comparison between left interpolated points map using inverse distance weighting, versus true values visualization on right.">
+      <figcaption>
+        Figure 2: IDW Interpolation Map at p=2 (left), Truth Phosphorus Map (right).
+</figcaption>
+
+           <figure>
+     <img src="error.png" alt="IDW interpolation map difference with true values, displayed on error map as red being overestimate and blue being underestimate of phosphorus values.">
+      <figcaption>
+        Figure 3: Error map created using raster calculator, of IDW minus true value on same 10m cell size. Map color ramp was inverted so that red represents an overestimate of phosphorus on the IDW map, or more phosphorus compared to the true value.
+</figcaption>
+                 
+      
+    <h2>What I found</h2>
+    <p>
+      I would recommend to the farmer to not grow crops in Field 5, due to the uncertainty of the map of soil quality. Although the interpolated map shows that only around 0.2 acres are below the required phosphorus amount, the reality is that there could be a much greater area that is unfit for use. We are unsure because the algorithm (inverse distance weighting) to create the map relies on the distance between an empty field and a nearby sample point. Only in Field 5, the southwest corners are entirely too far away from the nearest known value, which are concentrated in the top and half of the right edge of the field. If conditions in that blank area were not suitable to grow crops, we would not be able to tell due to the estimation of these values as just the averages of the known sample values. On the truth map, it really ended up being around 60 acres of unfit soil, rather than the 0.2 acres from the interpolated map. <br>
+This issue goes to clinical and healthcare accessibility as well. Using an inverse distance weighting algorithm with spread apart and sparse points results in whole blank areas becoming either unrepresented or falsely represented. When sampling people, it is important to have an even spread to create an interpolation map that best represents the whole population and area. If not, the city would end up only building clinics or allocating resources to known points, while the people in unrepresented areas would have no access to critical care.
+
+
+
+    </p>
+
+    <h2>What this does not show</h2>
+    <div class="limits">
+      <p>
+        Due to the sampling inconsistencies in Field 5, empty points are at much farther distances from known values compared to the more regular spacing in Fields 1-4. Based on the inverse distance weighting algorithm, these empty points are estimated using surrounding points, which are only known as the dots on the very side. In reality, the soil was completely depleted, but based on the map alone we cannot tell.
+
+      </p>
+      <p>
+        <strong>AI use:</strong> No AI tools were used
+        for this entry.
+      </p>
+    </div>
+
+    <a class="back" href="../index.html#labs">← Back to all labs</a>
+
+  </div>
+</article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap wrap-narrow">
+    <p>Marissa Gani · SOCS-SHU 205 · NYU Shanghai · Fall 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
